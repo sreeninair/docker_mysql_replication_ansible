@@ -1,0 +1,16 @@
+---
+ - name: yum update
+   yum: name=* state=latest
+ - name: installing libselinux-python
+   yum: name=libselinux-python state=present
+ - name: copy docker rpm
+   copy: src=docker.repo dest=/etc/yum.repos.d/docker.repo
+ - name: selinux disable
+   selinux: state=disabled
+ - name: rsync instalation
+   yum: name=rsync state=present
+ - name: installing mysql python
+   yum: name=MySQL-python state=present
+
+
+

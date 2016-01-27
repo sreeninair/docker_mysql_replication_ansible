@@ -1,0 +1,7 @@
+---
+ - name: taking backup from mysql master
+   command: mysqldump --skip-lock-tables --single-transaction --flush-logs --hex-blob --master-data=2 -A  --result-file={{ mysql_dump_location }}/{{ mysql_dump }}
+
+ - name: copying it to slave
+#   synchronize: pull dest_port=22   src={{ mysql_dump_location }}/{{ mysql_dump }}  dest=/home/{{ mysql_dump }} rsync_path="/usr/bin/rsync"
+   command: rsync -avzhpo {{ mysql_dump_location }}/{{ mysql_dump }}  root@69.175.114.182:/home/{{ mysql_dump }}

@@ -1,0 +1,39 @@
+---
+- name: create and copy keyt to local macine  also creting replcation user
+  hosts: mysqlmaster
+  remote_user: root
+
+
+  roles:
+    - mysqldump-repluser
+    - common
+    - keycopy
+- name: Installing docker and configuring mysql replication slave on it
+  hosts: webserver
+  remote_user: root
+
+   
+  roles:
+    - common
+    - docker-host-setup
+    - copysql-toslave
+
+- name: mysql-dump-master
+  hosts: mysqlmaster 
+  remote_user: root
+  roles:
+    - copy-dump
+
+- name: docker final setup
+  hosts: webserver
+  remote_user: root
+   
+  roles:
+    - docker-mysql-slave-setup
+    
+
+
+
+
+
+

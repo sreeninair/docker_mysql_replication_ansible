@@ -1,0 +1,61 @@
+#Glocal varibles will be defined here 
+
+#server details
+mysqlmaster: xx.xx.xx.xx
+docker_node: yy.yy.yy.yy
+dockercontainer: yy.yy.yy.yy
+
+#Specify the mysql version here: available versions are 5.7, 5.6, 5.5
+mysql_version: 5.7
+
+#mysql root password
+my_secret_pw: my_secret_pw
+
+#========================
+#creating replication user
+mysql_repl_user: repli_user
+
+#repliacation user password
+mysql_repl_pass: KHBUYFGYTFOIJHogh0843%32w
+
+#replication db
+
+replication_db: iywgedfiqud
+
+#
+id_server: 32
+log_bin: mysql-bin.000037
+mas_position: 154
+
+
+#========================
+
+
+#docker container name
+my_container_name: sreenivas
+
+#mysql datadirectory on host node
+
+mysql_host_datadir: /var/lib/datadir_5.7
+
+#mysql master dump location in master
+
+mysql_dump_location: /tmp
+
+#mysql dump name
+
+mysql_dump: /latest.sql
+
+#slave dump sql localtion
+
+mysql_slave_location: /home
+
+# passphrase for ssh keygen
+
+new_key: /root/.ssh/id_rsa
+pass_phrase: UUOYgy8u98qwdbihbqdwi
+
+#localhost destiination of key from master
+
+local_key_location: /home/sreenivas/ansible-key/
+localkey_file: /home/sreenivas/ansible-key/id_rsa.pub

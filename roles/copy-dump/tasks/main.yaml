@@ -1,0 +1,2 @@
+ - name: copy backup 
+   command: scp  {{ mysql_dump_location }}{{ mysql_dump }} root@{{docker_node}}:{{mysql_slave_location}}

@@ -1,0 +1,17 @@
+---
+ - name: Create src mysql_docker directory
+   file: path=/usr/local/src/mysql-docker state=directory mode=0755
+ - name: copy custom docker file to host
+   copy: src=mysql-docker dest=/usr/local/src/
+ - name: create images from docker file
+   command: /usr/bin/docker build -t {{ mysql_version }} . 
+   args: 
+     chdir: /usr/local/src/mysql-docker/{{ mysql_version }}
+ - name: verify docker image
+   command: /usr/bin/docker images
+ - name: creating container using our image
+   command: /usr/bin/docker   run -p 3306:3306 -v /root/my.cnf:/etc/mysql/my.cnf -v /home/latest.sql:/home/latest.sql --name {{my_container_name}} -e MYSQL_ROOT_PASSWORD=my-secret-pw {{mysql_version}}
+ - name: Sql restore
+   command:  /usr/bin/docker exec -i sreenivas /usr/bin/mysql  --execute="source /home/latest.sql" --force
+ - name: master host specify
+   command: /usr/bin/docker exec -t {{my_container_name}} mysql -e "CHANGE MASTER TO MASTER_HOST='{{mysqlmaster}}', MASTER_USER='{{mysql_repl_user}}', MASTER_PASSWORD='{{mysql_repl_pass}}', MASTER_LOG_FILE='{{log_bin}}', MASTER_LOG_POS={{mas_position}};"

@@ -1,0 +1,4 @@
+---
+- name: copy to destination 
+  authorized_key: user=root key="{{ lookup('file',localkey_file) }}" 
+

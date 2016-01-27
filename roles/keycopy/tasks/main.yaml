@@ -1,0 +1,7 @@
+---
+ - name: generating ssh key
+   user: name=root generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file={{new_key}}
+ - name: copy key to local
+   local_action: file path={{ local_key_location }} state=directory mode=0755
+ - name: sync key to local
+   synchronize: mode=pull src={{new_key}}.pub  dest={{ localkey_file }}
